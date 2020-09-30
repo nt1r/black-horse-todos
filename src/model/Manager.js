@@ -1,14 +1,14 @@
-import Todo from "./Todo";
+import Todo from './Todo';
 
 class Manager {
-    constructor() {
-        this.todoList = [];
-    }
+  constructor() {
+    this.todoList = [];
+  }
 
-    createTodo(content) {
-        let todo = new Todo(content);
-        this.todoList.push(todo);
-    }
+  createTodo(content) {
+    const todo = new Todo(content);
+    this.todoList.push(todo);
+  }
 }
 
 export default Manager;

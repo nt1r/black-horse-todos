@@ -9,4 +9,9 @@
 
 ## 创建路由 - 30min
 
+- 引入react router依赖
+- 新建一个主页
+- 新建一个Not Found页面
+- 设置Browser Router
+
 ## 完成页面布局和样式 - 60min
