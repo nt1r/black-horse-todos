@@ -8,6 +8,9 @@ import Homepage from './view/Homepage';
 import NotFoundPage from './view/NotFoundPage';
 
 class App extends Component {
+  componentDidMount() {
+  }
+
   render() {
     return (
       <BrowserRouter>

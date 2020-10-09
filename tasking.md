@@ -14,4 +14,7 @@
 - 新建一个Not Found页面
 - 设置Browser Router
 
-## 完成页面布局和样式 - 60min
+## 页面布局和样式 - 60min
+
+- react页面布局
+- 页面样式
