@@ -1,15 +1,15 @@
 import TodoController from '../../src/controller/TodoController';
-import Manager from '../../src/model/Manager';
+import TodoManager from '../../src/model/TodoManager';
 
-jest.mock('../../src/model/Manager');
+jest.mock('../../src/model/TodoManager');
 
 describe('controller test', () => {
   beforeEach(() => {
-    Manager.mockClear();
+    TodoManager.mockClear();
   });
 
   test('should create new todo', () => {
-    const manager = new Manager();
+    const manager = new TodoManager();
     const controller = new TodoController(manager);
 
     controller.addNewTodo('abc');

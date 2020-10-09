@@ -1,4 +1,4 @@
-import Manager from '../../src/model/Manager';
+import TodoManager from '../../src/model/TodoManager';
 import TodoController from '../../src/controller/TodoController';
 
 describe('app integration test', () => {
@@ -7,7 +7,7 @@ describe('app integration test', () => {
   });
 
   test('should create new todo', () => {
-    const manager = new Manager();
+    const manager = new TodoManager();
     const controller = new TodoController(manager);
 
     controller.addNewTodo('cooking');
@@ -19,7 +19,7 @@ describe('app integration test', () => {
   });
 
   test('should not create new todo when exist', () => {
-    const manager = new Manager();
+    const manager = new TodoManager();
     const controller = new TodoController(manager);
 
     controller.addNewTodo('abc');
@@ -29,7 +29,7 @@ describe('app integration test', () => {
   });
 
   test('should not create new todo when content empty', () => {
-    const manager = new Manager();
+    const manager = new TodoManager();
     const controller = new TodoController(manager);
 
     controller.addNewTodo('');

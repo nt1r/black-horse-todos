@@ -1,12 +1,12 @@
 import React from 'react';
-import Manager from '../model/Manager';
+import TodoManager from '../model/TodoManager';
 import TodoController from '../controller/TodoController';
 
 class Homepage extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.manager = new Manager();
+    this.manager = new TodoManager();
     this.controller = new TodoController(this.manager);
 
     this.state = {

@@ -14,7 +14,7 @@ describe('todo entity test', () => {
 
   test('should create with correct date', () => {
     const todo = new Todo('cooking');
-    const year = Number.parseInt(todo.createdTime.substr(0, 4), 10);
-    expect(year).toBeGreaterThanOrEqual(2020);
+    const date = todo.createdTime;
+    expect(date.getUTCFullYear() >= 2020).toBeTruthy();
   });
 });

@@ -1,6 +1,6 @@
 import Todo from './Todo';
 
-class Manager {
+class TodoManager {
   constructor() {
     this.todoList = [];
   }
@@ -28,4 +28,4 @@ class Manager {
   }
 }
 
-export default Manager;
+export default TodoManager;

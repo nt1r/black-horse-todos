@@ -1,4 +1,4 @@
-import Manager from '../../src/model/Manager';
+import TodoManager from '../../src/model/TodoManager';
 
 describe('manager test', () => {
   beforeEach(() => {
@@ -6,7 +6,7 @@ describe('manager test', () => {
   });
 
   test('should create new todo', () => {
-    const manager = new Manager();
+    const manager = new TodoManager();
     manager.createTodo('cooking');
 
     expect(manager.todoList.length).toBe(1);
@@ -16,7 +16,7 @@ describe('manager test', () => {
   });
 
   test('should not create new todo when exist', () => {
-    const manager = new Manager();
+    const manager = new TodoManager();
 
     manager.createTodo('abc');
     manager.createTodo('abc');
@@ -25,7 +25,7 @@ describe('manager test', () => {
   });
 
   test('should not create new todo when content empty', () => {
-    const manager = new Manager();
+    const manager = new TodoManager();
 
     manager.createTodo('');
 
