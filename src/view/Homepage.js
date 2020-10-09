@@ -31,6 +31,7 @@ class Homepage extends React.Component {
         this.controller.addNewTodo(inputText);
 
         this.setState({
+          inputText: '',
           todos: this.manager.todoList,
         });
 
