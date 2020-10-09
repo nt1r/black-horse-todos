@@ -1,7 +1,7 @@
 class Todo {
   constructor(content) {
     if (Todo.autoIncreasedId === undefined) {
-      Todo.autoIncreasedId = 1;
+      Todo.autoIncreasedId = 0;
     }
 
     this.id = this.generateId();
