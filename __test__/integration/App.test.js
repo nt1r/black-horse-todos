@@ -1,13 +1,16 @@
 import Manager from '../../src/model/Manager';
+import TodoController from '../../src/controller/TodoController';
 
-describe('manager test', () => {
+describe('app integration test', () => {
   beforeEach(() => {
 
   });
 
   test('should create new todo', () => {
     const manager = new Manager();
-    manager.createTodo('cooking');
+    const controller = new TodoController(manager);
+
+    controller.addNewTodo('cooking');
 
     expect(manager.todoList.length).toBe(1);
     expect(manager.todoList[0].id).toBe(1);
@@ -17,17 +20,19 @@ describe('manager test', () => {
 
   test('should not create new todo when exist', () => {
     const manager = new Manager();
+    const controller = new TodoController(manager);
 
-    manager.createTodo('abc');
-    manager.createTodo('abc');
+    controller.addNewTodo('abc');
+    controller.addNewTodo('abc');
 
     expect(manager.todoList.length).toBe(1);
   });
 
   test('should not create new todo when content empty', () => {
     const manager = new Manager();
+    const controller = new TodoController(manager);
 
-    manager.createTodo('');
+    controller.addNewTodo('');
 
     expect(manager.todoList.length).toBe(0);
   });

@@ -4,18 +4,18 @@ class Todo {
       Todo.autoIncreasedId = 0;
     }
 
-    this.id = this.generateId();
+    this.id = Todo.generateId();
     this.content = content;
     this.isCompleted = false;
-    this.createdTime = this.createCurrentDateText();
+    this.createdTime = Todo.createCurrentDateText();
   }
 
-  generateId() {
+  static generateId() {
     Todo.autoIncreasedId += 1;
     return Todo.autoIncreasedId;
   }
 
-  createCurrentDateText() {
+  static createCurrentDateText() {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth() + 1;

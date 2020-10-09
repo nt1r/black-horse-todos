@@ -1,6 +1,6 @@
 import Todo from '../../src/model/Todo';
 
-describe('todo entity __test__', () => {
+describe('todo entity test', () => {
   test('should create with correct id', () => {
     let todo = new Todo('abc');
     expect(todo.id).toBe(1);

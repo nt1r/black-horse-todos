@@ -24,7 +24,6 @@ body {
   font-size: 24px;
   font-family: inherit;
   font-weight: inherit;
-  font-style: italic;
   width: 550px;
   border: none;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
@@ -32,6 +31,7 @@ body {
 
 .todo_input::placeholder {
   color: lightgray;
+  font-style: italic;
 }
 
 .todo_input:focus {
