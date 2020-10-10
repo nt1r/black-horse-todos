@@ -2,6 +2,7 @@
 @use 'styles/_variable';
 
 $div-width: variable.$todo-width + 7.6 * variable.$base-padding;
+$div-height: 60px;
 
 body {
   background-color: variable.$background-color;
@@ -17,7 +18,7 @@ body {
 .app-title {
   font-size: 100px;
   font-weight: inherit;
-  color: rgba(175, 47, 47, 0.15);
+  color: variable.$primary-color;
   margin: variable.$base-margin;
 }
 
@@ -40,13 +41,17 @@ body {
   outline: none;
 }
 
-.todo-content {
-  @include mixin.flex-layout(row, flex-start, center, flex-start);
+.content-div-basic {
   width: $div-width;
   background-color: white;
+  height: $div-height;
+}
+
+.todo-content {
+  @include mixin.flex-layout(row, flex-start, center, flex-start);
+  @extend .content-div-basic;
   border: 1px solid variable.$background-color;
-  height: 60px;
-  box-shadow: 2px 0 1px 1px rgba(0, 0, 0, 0.2)
+  box-shadow: 2px 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 /* Hide the browser's default checkbox */
@@ -167,4 +172,40 @@ body {
 .todo-content-fade2 {
   @extend .content-fade-basic;
   width: $div-width * 0.96;
+}
+
+.filter-div {
+  @include mixin.flex-layout(row, center, center, flex-start);
+  @extend .content-div-basic;
+  position: relative;
+  font-size: 1em;
+  border: 1px solid variable.$background-color;
+  box-shadow: 2px 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.count-span {
+  margin-left: variable.$base-margin;
+  position: absolute;
+  left: 0;
+}
+
+.filter-ul {
+  display: block;
+  @include mixin.flex-layout(row, space-evenly, center, flex-start);
+  list-style-type: none;
+  width: 200px;
+  padding: 0;
+}
+
+.filter-button {
+  background: transparent;
+  border: none;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 100;
+  padding: variable.$base-padding / 2;
+}
+
+.filter-button:hover, .filter-button:focus, .filter-button:active, .filter-button:visited {
+  outline: 2px solid variable.$primary-color;
 }
