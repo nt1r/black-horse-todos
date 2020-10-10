@@ -60,16 +60,29 @@ class Homepage extends React.Component {
           onKeyPress={onInputKeyPress}
         />
         {
-          todos.map((todo) => (
-            <div className="todo-content" key={todo.id}>
-              <label className="checkbox-label" htmlFor={`checkbox${todo.id}`}>
-                <input className="checkbox" type="checkbox" id={`checkbox${todo.id}`} onChange={onCheckboxChange} />
-                <span className="checkbox-span" />
-                {todo.content}
-              </label>
-              <button className="checkbox-delete-button" type="button"> </button>
+          todos.length > 0 ? (
+            <div className="todos-div">
+              {
+                todos.map((todo) => (
+                  <div className="todo-content" key={todo.id}>
+                    <label className="checkbox-label" htmlFor={`checkbox${todo.id}`}>
+                      <input className="checkbox" type="checkbox" id={`checkbox${todo.id}`} onChange={onCheckboxChange} />
+                      <span className="checkbox-span" />
+                      {todo.content}
+                    </label>
+                    <button className="checkbox-delete-button" type="button"> </button>
+                  </div>
+                ))
+              }
+              <div className="todo-content-fade1" />
+              <div className="todo-content-fade2" />
             </div>
-          ))
+          )
+            : (
+              <div className="todo-content" key="no-content">
+                <span className="no-content-placeholder">No contents yet.</span>
+              </div>
+            )
         }
       </section>
     );

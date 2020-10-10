@@ -1,6 +1,8 @@
 @use 'styles/_mixin';
 @use 'styles/_variable';
 
+$div-width: variable.$todo-width + 7.6 * variable.$base-padding;
+
 body {
   background-color: variable.$background-color;
   height: 100%;
@@ -20,13 +22,13 @@ body {
 }
 
 .todo-input {
-  padding: 1.6 * variable.$base-padding 1.6 * variable.$base-padding 1.6 * variable.$base-padding 6 * variable.$base-padding;
-  font-size: 24px;
+  padding: 1.6 * variable.$base-padding 1.6 * variable.$base-padding 1.6 * variable.$base-padding 6.2 * variable.$base-padding;
+  font-size: variable.$todo-font-size;
   font-family: inherit;
   font-weight: inherit;
   width: variable.$todo-width;
   border: none;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .todo-input::placeholder {
@@ -40,10 +42,11 @@ body {
 
 .todo-content {
   @include mixin.flex-layout(row, flex-start, center, flex-start);
-  width: variable.$todo-width + 7.6 * variable.$base-padding;
+  width: $div-width;
   background-color: white;
   border: 1px solid variable.$background-color;
   height: 60px;
+  box-shadow: 2px 0 1px 1px rgba(0, 0, 0, 0.2)
 }
 
 /* Hide the browser's default checkbox */
@@ -59,7 +62,7 @@ body {
   @include mixin.flex-layout(row, flex-start, center, center);
   padding: 0.5 * variable.$base-padding 0.5 * variable.$base-padding 0.5 * variable.$base-padding 1.5 * variable.$base-padding;
   width: 95%;
-  font-size: 24px;
+  font-size: variable.$todo-font-size;
 }
 
 .checkbox-label .checkbox-span {
@@ -87,8 +90,8 @@ body {
   content: "";
   left: 12px;
   top: 12px;
-  height: 0px;
-  width: 0px;
+  height: 0;
+  width: 0;
   border-radius: 5px;
   border: solid variable.$check-color;
   border-width: 0 3px 3px 0;
@@ -135,4 +138,33 @@ body {
   background: url("./resources/close.png");
   border: none;
   margin-right: variable.$base-margin;
+}
+
+.no-content-placeholder {
+  font-size: variable.$todo-font-size;
+  font-style: italic;
+  color: lightgray;
+  text-align: center;
+  width: 100%;
+}
+
+.todos-div {
+  @include mixin.flex-layout(column, flex-start, center, flex-start);
+}
+
+.content-fade-basic {
+  background-color: white;
+  height: 5px;
+  box-shadow: 2px 1px 1px rgba(0, 0, 0, 0.2);
+  border: 1px solid variable.$background-color;
+}
+
+.todo-content-fade1 {
+  @extend .content-fade-basic;
+  width: $div-width * 0.98;
+}
+
+.todo-content-fade2 {
+  @extend .content-fade-basic;
+  width: $div-width * 0.96;
 }
