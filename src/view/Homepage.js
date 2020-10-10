@@ -40,21 +40,37 @@ class Homepage extends React.Component {
       }
     };
 
-    const { inputText } = this.state;
+    const onCheckboxChange = (event) => {
+      console.log(event.target.checked);
+    };
+
+    const { inputText, todos } = this.state;
 
     return (
       <section className="app">
         <header>
-          <h1 className="app_title">todos</h1>
+          <h1 className="app-title">todos</h1>
         </header>
         <input
-          className="todo_input"
+          className="todo-input"
           type="text"
           value={inputText}
           placeholder="What needs to be done?"
           onChange={onInputChange}
           onKeyPress={onInputKeyPress}
         />
+        {
+          todos.map((todo) => (
+            <div className="todo-content" key={todo.id}>
+              <label className="checkbox-label" htmlFor={`checkbox${todo.id}`}>
+                <input className="checkbox" type="checkbox" id={`checkbox${todo.id}`} onChange={onCheckboxChange} />
+                <span className="checkbox-span" />
+                {todo.content}
+              </label>
+              <button className="checkbox-delete-button" type="button"> </button>
+            </div>
+          ))
+        }
       </section>
     );
   }

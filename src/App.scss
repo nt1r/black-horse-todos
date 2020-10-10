@@ -2,7 +2,7 @@
 @use 'styles/_variable';
 
 body {
-  background-color: #f5f5f5;
+  background-color: variable.$background-color;
   height: 100%;
 }
 
@@ -12,28 +12,127 @@ body {
   font-weight: 100;
 }
 
-.app_title {
+.app-title {
   font-size: 100px;
   font-weight: inherit;
   color: rgba(175, 47, 47, 0.15);
   margin: variable.$base-margin;
 }
 
-.todo_input {
-  padding: 16px 16px 16px 60px;
+.todo-input {
+  padding: 1.6 * variable.$base-padding 1.6 * variable.$base-padding 1.6 * variable.$base-padding 6 * variable.$base-padding;
   font-size: 24px;
   font-family: inherit;
   font-weight: inherit;
-  width: 550px;
+  width: variable.$todo-width;
   border: none;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.todo_input::placeholder {
+.todo-input::placeholder {
   color: lightgray;
   font-style: italic;
 }
 
-.todo_input:focus {
+.todo-input:focus {
   outline: none;
+}
+
+.todo-content {
+  @include mixin.flex-layout(row, flex-start, center, flex-start);
+  width: variable.$todo-width + 7.6 * variable.$base-padding;
+  background-color: white;
+  border: 1px solid variable.$background-color;
+  height: 60px;
+}
+
+/* Hide the browser's default checkbox */
+.todo-content input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-label {
+  @include mixin.flex-layout(row, flex-start, center, center);
+  padding: 0.5 * variable.$base-padding 0.5 * variable.$base-padding 0.5 * variable.$base-padding 1.5 * variable.$base-padding;
+  width: 95%;
+  font-size: 24px;
+}
+
+.checkbox-label .checkbox-span {
+  height: variable.$checkbox-size;
+  width: variable.$checkbox-size;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 2px solid variable.$background-color;
+}
+
+.checkbox-label input:checked ~ .checkbox-span {
+  height: variable.$checkbox-size;
+  width: variable.$checkbox-size;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 2px solid variable.$background-color;
+  -webkit-transform: rotate(0deg) scale(1);
+  -ms-transform: rotate(0deg) scale(1);
+  transform: rotate(0deg) scale(1);
+  opacity:1;
+}
+
+.checkbox-label .checkbox-span::after {
+  position: absolute;
+  content: "";
+  left: 12px;
+  top: 12px;
+  height: 0px;
+  width: 0px;
+  border-radius: 5px;
+  border: solid variable.$check-color;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(0deg) scale(0);
+  -ms-transform: rotate(0deg) scale(0);
+  transform: rotate(0deg) scale(0);
+  opacity:1;
+  transition: all variable.$transition-duration ease-out;
+  -webkit-transition: all variable.$transition-duration ease-out;
+  -moz-transition: all variable.$transition-duration ease-out;
+  -o-transition: all variable.$transition-duration ease-out;
+}
+
+.checkbox-label input:checked ~ .checkbox-span::after {
+  -webkit-transform: rotate(45deg) scale(1);
+  -ms-transform: rotate(45deg) scale(1);
+  transform: rotate(45deg) scale(1);
+  opacity:1;
+  left: 8px;
+  top: 3px;
+  width: 6px;
+  height: 12px;
+  border: solid variable.$check-color;
+  border-width: 0 2px 2px 0;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.checkbox-span {
+  display: block;
+  align-self: center;
+  margin-right: variable.$base-margin;
+}
+
+.checkbox-delete-button {
+  display: none;
+}
+
+.todo-content:hover .checkbox-delete-button {
+  display: block;
+  align-self: center;
+  width: variable.$icon-size;
+  height: variable.$icon-size;
+  background: url("./resources/close.png");
+  border: none;
+  margin-right: variable.$base-margin;
 }
