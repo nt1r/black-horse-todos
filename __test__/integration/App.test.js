@@ -36,4 +36,14 @@ describe('app integration test', () => {
 
     expect(manager.todoList.length).toBe(0);
   });
+
+  test('should change todo state by id', () => {
+    const manager = new TodoManager();
+    const controller = new TodoController(manager);
+
+    controller.addNewTodo('abc');
+    controller.setCompletedStatusById(1, true);
+
+    expect(manager.todoList[0].isCompleted).toBeTruthy();
+  });
 });

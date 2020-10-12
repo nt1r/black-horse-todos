@@ -47,3 +47,17 @@
 
 - 前方的todo数量
 - 3个过滤标签
+
+## Card 5
+
+### 更改待办事项的状态 - 25min
+
+- 在view层中提供点击checkbox的事件函数，能够判断checkbox的状态，并提供被点击todo的id（10min）
+- 在controller层中新建一个更改todo状态的逻辑，接受todo的id作为参数（5min）
+- 在model层中的manager中提供一个更改todo状态的接口，以id作为参数（10min）
+
+### 测试用例 - 30min
+
+- 编写controller层的测试用例（10min）
+- 编写model层的测试用例（10min）
+- 编写集成测试用例（10min）

@@ -40,8 +40,11 @@ class Homepage extends React.Component {
       }
     };
 
-    const onCheckboxChange = (event) => {
-      console.log(event.target.checked);
+    const onCheckboxChange = (event, todoId) => {
+      this.controller.setCompletedStatusById(todoId, event.target.checked);
+      this.setState({
+        todos: this.manager.todoList,
+      });
     };
 
     const onClickAllFilter = () => {
@@ -75,17 +78,23 @@ class Homepage extends React.Component {
           todos.length > 0 ? (
             <div className="todos-div">
               {
-                todos.map((todo) => (
-                  <div className="todo-content" key={todo.id}>
-                    <label className="checkbox-label" htmlFor={`checkbox${todo.id}`}>
-                      <input className="checkbox" type="checkbox" id={`checkbox${todo.id}`} onChange={onCheckboxChange} />
-                      <span className="checkbox-span" />
-                      {todo.content}
-                    </label>
-                    <button className="checkbox-delete-button" type="button"> </button>
-                  </div>
-                ))
-              }
+                  todos.map((todo) => (
+                    <div className="todo-content" key={todo.id}>
+                      <label className="checkbox-label" htmlFor={`checkbox${todo.id}`}>
+                        <input
+                          className="checkbox"
+                          type="checkbox"
+                          id={`checkbox${todo.id}`}
+                          checked={todo.isCompleted}
+                          onChange={(event) => onCheckboxChange(event, todo.id)}
+                        />
+                        <span className="checkbox-span" />
+                        {todo.content}
+                      </label>
+                      <button className="checkbox-delete-button" type="button">{}</button>
+                    </div>
+                  ))
+                }
               <div className="filter-div">
                 <span className="count-span">
                   {todos.length}
@@ -96,9 +105,15 @@ class Homepage extends React.Component {
                   left
                 </span>
                 <ul className="filter-ul">
-                  <li className="filter-li"><button className="filter-button" type="button" onClick={onClickAllFilter}>All</button></li>
-                  <li className="filter-li"><button className="filter-button" type="button" onClick={onClickActiveFilter}>Active</button></li>
-                  <li className="filter-li"><button className="filter-button" type="button" onClick={onClickCompletedFilter}>Completed</button></li>
+                  <li className="filter-li">
+                    <button className="filter-button" type="button" onClick={onClickAllFilter}>All</button>
+                  </li>
+                  <li className="filter-li">
+                    <button className="filter-button" type="button" onClick={onClickActiveFilter}>Active</button>
+                  </li>
+                  <li className="filter-li">
+                    <button className="filter-button" type="button" onClick={onClickCompletedFilter}>Completed</button>
+                  </li>
                 </ul>
               </div>
               <div className="todo-content-fade1" />
