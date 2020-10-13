@@ -197,15 +197,18 @@ body {
   padding: 0;
 }
 
-.filter-button {
+.filter-link {
   background: transparent;
   border: none;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1em;
   font-weight: 100;
   padding: variable.$base-padding / 2;
+  text-decoration: none;
+  color: black;
 }
 
-.filter-button:hover, .filter-button:focus, .filter-button:active, .filter-button:visited {
+.filter-link:hover, .filter-link:focus, .filter-link:active, .filter-link:visited {
   outline: 2px solid variable.$primary-color;
+  color: black;
 }

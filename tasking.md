@@ -61,3 +61,19 @@
 - 编写controller层的测试用例（10min）
 - 编写model层的测试用例（10min）
 - 编写集成测试用例（10min）
+
+## Card 14
+
+### 使用local storage存储todo list数据
+
+- 了解Web Storage API的使用方法
+- 在model层中添加用于存储和读取local storage的类
+- 编写测试用例
+
+# Card 16
+
+### 创建过滤器路由
+
+- 将页面中的过滤器标签设置对应的路由
+- 实现路由跳转的点击事件
+- 处理标签中不存在todo的情景

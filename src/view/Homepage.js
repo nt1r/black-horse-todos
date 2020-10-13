@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import TodoManager from '../model/TodoManager.ts';
 import TodoController from '../controller/TodoController.ts';
 import TodoLocalStorage from '../storage/TodoLocalStorage.ts';
@@ -108,13 +109,13 @@ class Homepage extends React.Component {
                 </span>
                 <ul className="filter-ul">
                   <li className="filter-li">
-                    <button className="filter-button" type="button" onClick={onClickAllFilter}>All</button>
+                    <Link className="filter-link" onClick={onClickAllFilter} to="/#">All</Link>
                   </li>
                   <li className="filter-li">
-                    <button className="filter-button" type="button" onClick={onClickActiveFilter}>Active</button>
+                    <Link className="filter-link" type="button" onClick={onClickActiveFilter} to="/#/active">Active</Link>
                   </li>
                   <li className="filter-li">
-                    <button className="filter-button" type="button" onClick={onClickCompletedFilter}>Completed</button>
+                    <Link className="filter-link" type="button" onClick={onClickCompletedFilter} to="/#/completed">Completed</Link>
                   </li>
                 </ul>
               </div>
