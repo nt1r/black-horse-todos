@@ -1,12 +1,14 @@
 import React from 'react';
-import TodoManager from '../model/TodoManager';
-import TodoController from '../controller/TodoController';
+import TodoManager from '../model/TodoManager.ts';
+import TodoController from '../controller/TodoController.ts';
+import TodoLocalStorage from '../storage/TodoLocalStorage.ts';
 
 class Homepage extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.manager = new TodoManager();
+    const storage = new TodoLocalStorage();
+    this.manager = new TodoManager(storage);
     this.controller = new TodoController(this.manager);
 
     this.state = {

@@ -36,9 +36,13 @@ module.exports = {
           'file-loader',
         ],
       },
+      {
+        test: /\.ts?$/,
+        loader: 'awesome-typescript-loader',
+      },
     ],
   },
-  resolve: { extensions: ['*', '.js', '.jsx'] },
+  resolve: { extensions: ['*', '.js', '.jsx', '.ts'] },
   output: {
     path: path.resolve(__dirname, 'dist/'),
     publicPath: '/dist/',

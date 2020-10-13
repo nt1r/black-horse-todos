@@ -1,13 +1,15 @@
 import TodoManager from '../../src/model/TodoManager';
 import TodoController from '../../src/controller/TodoController';
+import TodoLocalStorage from "../../src/storage/TodoLocalStorage";
 
 describe('app integration test', () => {
   beforeEach(() => {
-
+    localStorage.clear();
   });
 
   test('should create new todo', () => {
-    const manager = new TodoManager();
+    const storage = new TodoLocalStorage();
+    const manager = new TodoManager(storage);
     const controller = new TodoController(manager);
 
     controller.addNewTodo('cooking');
@@ -19,7 +21,8 @@ describe('app integration test', () => {
   });
 
   test('should create new todo when exist', () => {
-    const manager = new TodoManager();
+    const storage = new TodoLocalStorage();
+    const manager = new TodoManager(storage);
     const controller = new TodoController(manager);
 
     controller.addNewTodo('abc');
@@ -29,7 +32,8 @@ describe('app integration test', () => {
   });
 
   test('should not create new todo when content empty', () => {
-    const manager = new TodoManager();
+    const storage = new TodoLocalStorage();
+    const manager = new TodoManager(storage);
     const controller = new TodoController(manager);
 
     controller.addNewTodo('');
@@ -38,7 +42,8 @@ describe('app integration test', () => {
   });
 
   test('should change todo state by id', () => {
-    const manager = new TodoManager();
+    const storage = new TodoLocalStorage();
+    const manager = new TodoManager(storage);
     const controller = new TodoController(manager);
 
     controller.addNewTodo('abc');
