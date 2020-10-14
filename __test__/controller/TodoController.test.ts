@@ -10,7 +10,7 @@ import TodoLocalStorage from "../../src/storage/TodoLocalStorage";
 import {mocked} from "ts-jest/utils";
 import {
   mockGetGeneratedId,
-  mockGetTodoList,
+  mockGetTodoList, mockSetFilteredTodoList,
   mockSetGeneratedId,
   mockSetTodoList, mockStorageAvailable
 } from "../../__mocks__/TodoLocalStorage";
@@ -37,11 +37,13 @@ describe('controller test', () => {
       return {
         todoStorage: storage,
         todoList: [],
+        filteredTodoList: [],
         createTodo: mockCreateTodo,
         findTodoById: mockFindTodoById,
         setCompletedStatusById: mockSetCompletedStatusById,
         setTodoList: mockSetTodoList,
         setGeneratedId: mockSetGeneratedId,
+        setFilteredTodoList: mockSetFilteredTodoList,
       }
     })
   });

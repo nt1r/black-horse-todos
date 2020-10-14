@@ -1,8 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {
+  Link,
+} from 'react-router-dom';
+
 import TodoManager from '../model/TodoManager.ts';
 import TodoController from '../controller/TodoController.ts';
 import TodoLocalStorage from '../storage/TodoLocalStorage.ts';
+import { parseFilterFromUrl } from '../utils/UrlUtil.ts';
+import { TodoFilter } from '../constant/TodoFilter.ts';
 
 class Homepage extends React.Component {
   constructor(props, context) {
@@ -14,14 +19,25 @@ class Homepage extends React.Component {
 
     this.state = {
       inputText: '',
-      todos: this.manager.todoList,
+      todos: this.manager.filteredTodoList,
     };
   }
 
   componentDidMount() {
+    this.controller.filterTodos(parseFilterFromUrl(window.location.hash));
+    this.setState({
+      todos: this.manager.filteredTodoList,
+    });
+    console.log('aaa');
   }
 
   render() {
+    const updateTodos = () => {
+      this.setState({
+        todos: this.manager.filteredTodoList,
+      });
+    };
+
     const onInputChange = (event) => {
       this.setState({
         inputText: event.target.value,
@@ -35,7 +51,7 @@ class Homepage extends React.Component {
 
         this.setState({
           inputText: '',
-          todos: this.manager.todoList,
+          todos: this.manager.filteredTodoList,
         });
 
         const { todos } = this.state;
@@ -45,21 +61,22 @@ class Homepage extends React.Component {
 
     const onCheckboxChange = (event, todoId) => {
       this.controller.setCompletedStatusById(todoId, event.target.checked);
-      this.setState({
-        todos: this.manager.todoList,
-      });
+      updateTodos();
     };
 
     const onClickAllFilter = () => {
-      console.log('All');
+      this.controller.filterTodos(TodoFilter.all);
+      updateTodos();
     };
 
     const onClickActiveFilter = () => {
-      console.log('Active');
+      this.controller.filterTodos(TodoFilter.active);
+      updateTodos();
     };
 
     const onClickCompletedFilter = () => {
-      console.log('Completed');
+      this.controller.filterTodos(TodoFilter.completed);
+      updateTodos();
     };
 
     const { inputText, todos } = this.state;
@@ -109,7 +126,7 @@ class Homepage extends React.Component {
                 </span>
                 <ul className="filter-ul">
                   <li className="filter-li">
-                    <Link className="filter-link" onClick={onClickAllFilter} to="/#">All</Link>
+                    <Link className="filter-link" onClick={onClickAllFilter} to="/#/">All</Link>
                   </li>
                   <li className="filter-li">
                     <Link className="filter-link" type="button" onClick={onClickActiveFilter} to="/#/active">Active</Link>
