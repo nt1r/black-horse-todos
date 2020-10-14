@@ -28,7 +28,6 @@ class Homepage extends React.Component {
     this.setState({
       todos: this.manager.filteredTodoList,
     });
-    console.log('aaa');
   }
 
   render() {
@@ -53,9 +52,6 @@ class Homepage extends React.Component {
           inputText: '',
           todos: this.manager.filteredTodoList,
         });
-
-        const { todos } = this.state;
-        console.log(todos);
       }
     };
 
@@ -109,35 +105,15 @@ class Homepage extends React.Component {
                           onChange={(event) => onCheckboxChange(event, todo.id)}
                         />
                         <span className="checkbox-span" />
-                        {todo.content}
+                        {
+                          todo.isCompleted ? <span className="todo-content-span-completed">{todo.content}</span>
+                            : <span>{todo.content}</span>
+                        }
                       </label>
                       <button className="checkbox-delete-button" type="button">{}</button>
                     </div>
                   ))
                 }
-              <div className="filter-div">
-                <span className="count-span">
-                  {todos.length}
-                  {' '}
-                  {
-                    todos.length > 1 ? 'items ' : 'item '
-                  }
-                  left
-                </span>
-                <ul className="filter-ul">
-                  <li className="filter-li">
-                    <Link className="filter-link" onClick={onClickAllFilter} to="/#/">All</Link>
-                  </li>
-                  <li className="filter-li">
-                    <Link className="filter-link" type="button" onClick={onClickActiveFilter} to="/#/active">Active</Link>
-                  </li>
-                  <li className="filter-li">
-                    <Link className="filter-link" type="button" onClick={onClickCompletedFilter} to="/#/completed">Completed</Link>
-                  </li>
-                </ul>
-              </div>
-              <div className="todo-content-fade1" />
-              <div className="todo-content-fade2" />
             </div>
           )
             : (
@@ -146,6 +122,43 @@ class Homepage extends React.Component {
               </div>
             )
         }
+        <div className="filter-div">
+          <span className="count-span">
+            {todos.length}
+            {' '}
+            {
+              todos.length > 1 ? 'items ' : 'item '
+            }
+            left
+          </span>
+          <ul className="filter-ul">
+            <li className="filter-li">
+              <Link className="filter-link" onClick={onClickAllFilter} to="/#/">All</Link>
+            </li>
+            <li className="filter-li">
+              <Link
+                className="filter-link"
+                type="button"
+                onClick={onClickActiveFilter}
+                to="/#/active"
+              >
+                Active
+              </Link>
+            </li>
+            <li className="filter-li">
+              <Link
+                className="filter-link"
+                type="button"
+                onClick={onClickCompletedFilter}
+                to="/#/completed"
+              >
+                Completed
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div className="todo-content-fade1" />
+        <div className="todo-content-fade2" />
       </section>
     );
   }

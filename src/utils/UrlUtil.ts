@@ -11,6 +11,8 @@ export const parseFilterFromUrl = (tailUrl: string): TodoFilter => {
         return TodoFilter.active;
       case 'completed':
         return TodoFilter.completed;
+      default:
+        return TodoFilter.all;
     }
   }
 }

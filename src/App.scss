@@ -212,3 +212,8 @@ body {
   outline: 2px solid variable.$primary-color;
   color: black;
 }
+
+.todo-content-span-completed {
+  text-decoration: line-through;
+  color: lightgray;
+}
