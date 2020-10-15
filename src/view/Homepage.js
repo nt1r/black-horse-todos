@@ -1,13 +1,11 @@
 import React from 'react';
-import {
-  Link,
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import TodoManager from '../model/TodoManager.ts';
 import TodoController from '../controller/TodoController.ts';
 import TodoLocalStorage from '../storage/TodoLocalStorage.ts';
-import { parseFilterFromUrl } from '../utils/UrlUtil.ts';
-import { TodoFilter } from '../constant/TodoFilter.ts';
+import { parseFilterFromUrl, parseFilterStrFromUrl } from '../utils/UrlUtil.ts';
 
 class Homepage extends React.Component {
   constructor(props, context) {
@@ -20,23 +18,32 @@ class Homepage extends React.Component {
     this.state = {
       inputText: '',
       todos: this.manager.filteredTodoList,
+      filter: 'all',
     };
   }
 
   componentDidMount() {
-    this.controller.filterTodos(parseFilterFromUrl(window.location.hash));
+    this.refreshTodoList();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { location } = this.props;
+    if (prevProps.location.hash !== location.hash) {
+      this.refreshTodoList();
+    }
+  }
+
+  refreshTodoList() {
+    const { location } = this.props;
+    this.controller.filterTodos(parseFilterFromUrl(location.hash));
+    const todoFilter = parseFilterStrFromUrl(location.hash);
     this.setState({
       todos: this.manager.filteredTodoList,
+      filter: todoFilter,
     });
   }
 
   render() {
-    const updateTodos = () => {
-      this.setState({
-        todos: this.manager.filteredTodoList,
-      });
-    };
-
     const onInputChange = (event) => {
       this.setState({
         inputText: event.target.value,
@@ -45,9 +52,10 @@ class Homepage extends React.Component {
 
     const onInputKeyPress = (event) => {
       if (event.key === 'Enter') {
+        const { location } = this.props;
         const { inputText } = this.state;
         this.controller.addNewTodo(inputText);
-
+        this.controller.filterTodos(parseFilterFromUrl(location.hash));
         this.setState({
           inputText: '',
           todos: this.manager.filteredTodoList,
@@ -57,25 +65,10 @@ class Homepage extends React.Component {
 
     const onCheckboxChange = (event, todoId) => {
       this.controller.setCompletedStatusById(todoId, event.target.checked);
-      updateTodos();
+      this.refreshTodoList();
     };
 
-    const onClickAllFilter = () => {
-      this.controller.filterTodos(TodoFilter.all);
-      updateTodos();
-    };
-
-    const onClickActiveFilter = () => {
-      this.controller.filterTodos(TodoFilter.active);
-      updateTodos();
-    };
-
-    const onClickCompletedFilter = () => {
-      this.controller.filterTodos(TodoFilter.completed);
-      updateTodos();
-    };
-
-    const { inputText, todos } = this.state;
+    const { inputText, todos, filter } = this.state;
 
     return (
       <section className="app">
@@ -133,24 +126,34 @@ class Homepage extends React.Component {
           </span>
           <ul className="filter-ul">
             <li className="filter-li">
-              <Link className="filter-link" onClick={onClickAllFilter} to="/#/">All</Link>
+              <Link
+                className={filter === 'all' ? 'filter-link-selected' : 'filter-link'}
+                to={(location) => ({
+                  pathname: location.pathname,
+                  hash: '#/',
+                })}
+              >
+                All
+              </Link>
             </li>
             <li className="filter-li">
               <Link
-                className="filter-link"
-                type="button"
-                onClick={onClickActiveFilter}
-                to="/#/active"
+                className={filter === 'active' ? 'filter-link-selected' : 'filter-link'}
+                to={(location) => ({
+                  pathname: location.pathname,
+                  hash: '#/active',
+                })}
               >
                 Active
               </Link>
             </li>
             <li className="filter-li">
               <Link
-                className="filter-link"
-                type="button"
-                onClick={onClickCompletedFilter}
-                to="/#/completed"
+                className={filter === 'completed' ? 'filter-link-selected' : 'filter-link'}
+                to={(location) => ({
+                  pathname: location.pathname,
+                  hash: '#/completed',
+                })}
               >
                 Completed
               </Link>
@@ -163,5 +166,12 @@ class Homepage extends React.Component {
     );
   }
 }
+
+Homepage.propTypes = {
+  location: PropTypes.shape({
+    hash: PropTypes.string.isRequired,
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default Homepage;

@@ -16,3 +16,12 @@ export const parseFilterFromUrl = (tailUrl: string): TodoFilter => {
     }
   }
 }
+
+export const parseFilterStrFromUrl = (tailUrl: string): string => {
+  const lastSlashIndex = tailUrl.lastIndexOf('/');
+  if (lastSlashIndex === -1 || lastSlashIndex === tailUrl.length - 1) {
+    return 'all';
+  } else {
+    return tailUrl.substring(lastSlashIndex + 1, tailUrl.length);
+  }
+}

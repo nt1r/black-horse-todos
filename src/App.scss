@@ -208,7 +208,12 @@ body {
   color: black;
 }
 
-.filter-link:hover, .filter-link:focus, .filter-link:active, .filter-link:visited {
+.filter-link-selected {
+  @extend .filter-link;
+  outline: 2px solid variable.$primary-color;
+}
+
+.filter-link:hover {
   outline: 2px solid variable.$primary-color;
   color: black;
 }

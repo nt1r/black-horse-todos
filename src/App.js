@@ -13,7 +13,7 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter forceRefresh>
         <Switch>
           <Route path="/error" component={NotFoundPage} />
           <Route path="/" component={Homepage} />
